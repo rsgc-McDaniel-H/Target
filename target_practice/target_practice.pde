@@ -1,5 +1,4 @@
-// Russell Gordon (please change to your name)
-
+//Hudson McDaniel
 /*
  * Global variables – accessible in any function below.
  */
@@ -9,6 +8,8 @@ float y = 0; // Vertical position of target
 float ySpeed = 0;  // Vertical speed of target
 float diameter = 0;  // Size of target
 float score = 0;       // Keeps track of score
+float xObj = 400; //oject
+float xCatcher = diameter; //object catcher
 
 /*
  * This function runs once, unless explicitly invoked elsewhere.
@@ -31,12 +32,22 @@ void draw() {
 
   // Clear prior screen
   background(255);
+  
+  //catch
+  rect(mouseX, 400, 60, 20);
+  //rect(mouseX,415, 20, 10);
+  if(xObj >= xCatcher && xObj <= xCatcher +25);
+  {
+    newTarget();
+  }
+  
+
 
   // Update position of ball
   y = y + ySpeed;
 
   // Draw new position of ball
-  ellipse(x, y, diameter, diameter);
+  rect(x, y, diameter, diameter);
   
   // check for hit
   float a = mouseX - x; 
