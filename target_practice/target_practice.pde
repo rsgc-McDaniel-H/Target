@@ -45,14 +45,14 @@ void draw() {
   //image(test, x, y)
 
   background(#FCFFFD);
-  imageMode(CENTER); //Center the image of the basket on the screen
+  //imageMode(CENTER); //Center the image of the basket on the screen
   image(Catcher, mouseX, 400, catcherWidth, catcherHight); // have the catcher on the screen
   image(WaterM, objectX, objectY, objectDiameter, objectDiameter); 
 
-  text("objectX is: " + objectX, 50, 100);
-  text("objectY is: " + objectY, 50, 200);
-  text("catcherX is: " + catcherX, 50, 300);
-  text("catcherY is: " + catcherY, 50, 400);
+  //text("objectX is: " + objectX, 50, 100);
+  //text("objectY is: " + objectY, 50, 200);
+  //text("catcherX is: " + catcherX, 50, 300);
+  //text("catcherY is: " + catcherY, 50, 400);
   
   // Update position of the catcher
   catcherX=mouseX;
@@ -107,7 +107,7 @@ void newTarget() {
   // (int) casts, or forces, non-integer results to become integers 
   objectX = random(0, width);       // Horizontal position changes
   objectY = 0 - objectDiameter / 2;       // Target starts just off of top of screen
-  objectYSpeed = random(1, 10);     // Speed varies
+  objectYSpeed = random(10, 0);     // Speed varies
   objectDiameter = random(25, 50);  // Diameter varies
   score = 0;                  // Score begins at zero
   fill(0);                    // Black fill for target
