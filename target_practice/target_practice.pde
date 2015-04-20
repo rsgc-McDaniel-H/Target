@@ -10,8 +10,12 @@ float objectDiameter = 0;  // Size of target
 float score = 0;       // Keeps track of score
 float catcherX = 415; //horizontal position of the catcher
 float catcherY = 400; // vertical pozition of the catcher
-float catcherWidth = 60; //width of the catcher
-float catcherHight = 20; //height of catcher
+float catcherWidth = 80; //width of the catcher
+float catcherHight = 40; //height of catcher
+PImage Catcher;
+PImage WaterM;
+
+
 
 
 /*
@@ -21,10 +25,14 @@ void setup() {
 
   // Create a canvas with white background
   size(400, 600);
-  background(#00FF0A);
+  background(#FCFFFD);
 
   // newTarget
   newTarget();
+
+  Catcher = loadImage("Catcher.png");
+  WaterM = loadImage("WaterM.png");
+
 }
 
 /*
@@ -33,8 +41,14 @@ void setup() {
 void draw() {
 
   // Clear prior screen
-  background(#00FF0A);
-  text("score", 10, 50);
+  //imageMode(CENTER);
+  //image(test, x, y)
+
+  background(#FCFFFD);
+  imageMode(CENTER); //Center the image of the basket on the screen
+  image(Catcher, mouseX, 400, catcherWidth, catcherHight); // have the catcher on the screen
+  image(WaterM, objectX, objectY, objectDiameter, objectDiameter); 
+
   text("objectX is: " + objectX, 50, 100);
   text("objectY is: " + objectY, 50, 200);
   text("catcherX is: " + catcherX, 50, 300);
@@ -46,22 +60,27 @@ void draw() {
   //draw catcher
   //rect(catcherX, catcherY, 20, 10);
 
-  rect(mouseX, 415, catcherWidth, catcherHight);
-  if (objectX >= catcherX && objectX <= catcherX + catcherWidth && objectY >= catcherY && objectY <= catcherY + catcherHight);
-  {
-    //newTarget();
+  //rect(mouseX, 415, catcherWidth, catcherHight); //object catceher
+  if (objectX >= catcherX && objectX <= catcherX + catcherWidth && objectY >= catcherY && objectY <= catcherY + catcherHight) {
+    newTarget();
+    println("hit");
+  } else {
+    println("no hit");
   }
- 
- 
-    //newTarget();
- 
+
+
+
+  //newTarget();
+
 
 
   // Update position of ball
   objectY = objectY + objectYSpeed;
 
   // Draw new position of ball
-  rect(objectX, objectY, objectDiameter, objectDiameter);
+
+  //rect(objectX, objectY, objectDiameter, objectDiameter);
+
 
   // check for hit
   float a = mouseX - objectX; 
@@ -98,7 +117,7 @@ void newTarget() {
   println("Vertical position is: " + objectY);
   println("Vertical speed is: " + objectYSpeed);
   println("Size of target is: " + objectDiameter);
-  println("Score is: " + score);
+
 
   //text("score", 100, 100);
 } 
