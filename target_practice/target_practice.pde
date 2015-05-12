@@ -2,11 +2,11 @@
 /*
  * Global variables – accessible in any function below.
  */
-boolean start = true; //
-boolean play = true; //
-boolean reset = true; //
-boolean scoreChanger = true;
-boolean speedChanger = true;
+boolean start = true; // boolean is either true or false and I have set the start screen to true
+boolean play = true; //  boolean is either true or false and I have set the play button
+boolean reset = true; // boolean is either true or false and I have set the reset button
+boolean scoreChanger = true; //boolean is either true or false and I have set the score changer to true
+boolean speedChanger = true; //I have set the spped changer to true
 float objectX = 390; // Horizontal position of object
 float objectY = 0; // Vertical position of object
 float objectYSpeed = 0;  // Vertical speed of object
@@ -24,15 +24,18 @@ PImage heartImage; //image of the live heart
 PImage Hamburger; //object hamburger
 PImage pizzaSl; //Image of Pizza
 PImage gameOver; //image of game over
-PImage startGame;
-PImage blackBox;
-int backG1 = 1;
-int backG2 = 2;
+PImage startGame; // The image of the Start game
+PImage blackBox; //image of a black box
+int backG1 = 1; // background image 1
+int backG2 = 2; // background image 2
 PImage background1 = bgImage;
 PImage background2 = startGame;
 float chooser = 0; //this iteam dropped
-PImage basketImage2;
-
+PImage basketImage2; //basket image #2
+PImage basketImage3; //basket Image #3
+PImage hamburger2; //hamburger Image #2
+float HighScore = 0;
+//float score = 0;
 /*
  * This function runs once, unless explicitly invoked elsewhere.
  */
@@ -52,9 +55,11 @@ void setup() {
   Hamburger = loadImage("Hamburger.png"); // load image of the hamburger
   pizzaSl = loadImage("Pizza.png"); //load The image of the Pizza
   gameOver = loadImage("GameOver.png");//load the image of game over
-  startGame = loadImage("StartGame.png");
-  blackBox = loadImage("Black Box");
-  basketImage2 = loadImage("Basket2.png");
+  startGame = loadImage("StartGame.png"); // laod start game image
+  blackBox = loadImage("Black Box"); //load black box image
+  basketImage2 = loadImage("Basket2.png"); // load basket image 2
+  basketImage3 = loadImage("BacketCatcher.png"); //load basket image 3
+  hamburger2 = loadImage("Hamburger2.png"); // load hamburger image 2
 }
 
 
@@ -95,19 +100,28 @@ void draw() {
   text(int(score), 100, 30); //adds the score when object has been catched
   text("Miss:", 50, 50);//position of the miss on the screen
   text(int(miss), 100, 50); //miss variable conting misses
+  //text("HighScore", 200, 50);
+  text("Press r to restart", 200, 25); // Displays text on screen
+  text("Press p to pause", 200, 40); // Displays text on screen
+  text("Press q to resume", 200, 55); // Displays text on screen
+
+  //if(score > HighScore) {
+  // score = HighScore;
+  // }
+
 
 
   //imageMode(CENTER); //Center the image of the basket on the screen
   if (start == false) {
 
-    image(WaterM, objectX, objectY, objectDiameter, objectDiameter); 
+    image(hamburger2, objectX, objectY, objectDiameter, objectDiameter); //This line states what size the object has to be and what the object is
   }
-    //image(Hamburger, objectX, objectY, objectDiameter, objectDiameter);
-    //image(pizzaSl, objectX, objectY, objectDiameter, objectDiameter);
-  
+  //image(Hamburger, objectX, objectY, objectDiameter, objectDiameter);
+  //image(pizzaSl, objectX, objectY, objectDiameter, objectDiameter);
+
   //image(heartImage, 400, 50);
   if (start == false) {
-    image(basketImage2, mouseX, 550, catcherWidth, catcherHight); // have the catcher on the screen
+    image(basketImage3, mouseX, 550, catcherWidth, catcherHight); // have the catcher on the screen if the screen is the game screen
   }
   //text("objectX is: " + objectX, 50, 100);
   //text("objectY is: " + objectY, 50, 200);
@@ -115,20 +129,20 @@ void draw() {
   //text("catcherY is: " + catcherY, 50, 400);
 
   // Update position of the catcher
-  catcherX=mouseX;
+  catcherX=mouseX; //this means that the x position of the catcher is where the mouse is located on the x axis
 
   //draw catcher
   //rect(catcherX, catcherY, 20, 10);
 
   //rect(mouseX, 415, catcherWidth, catcherHight); //object catceher
   if (start == false) {
-    if (objectX >= catcherX && objectX <= catcherX + catcherWidth && objectY >= catcherY && objectY <= catcherY + catcherHight) {
+    if (objectX >= catcherX && objectX <= catcherX + catcherWidth && objectY >= catcherY && objectY <= catcherY + catcherHight) { //if statment used to debug the game and tell the catcher when it has caught the ball
       newTarget();
-      score = score + 1;
-      println("hit");
+      score = score + 1;//if the catcher catches the ball the score will increase by one
+      println("hit"); //will print the word hit in the console if the ball is caught
     } else {
 
-      println("no hit");
+      println("no hit");//will print the word miss in the console if the ball is missed
     }
   }
 
@@ -224,33 +238,30 @@ void keyReleased() {
   if (key == 's') { //changes back ground from game to start
     start = false;
   } else {
- // fill(#FF0000);
+    // fill(#FF0000);
     //text("Press S to Start", 400, 200);
-   //objectYSpeed = random(0, 0);
+    //objectYSpeed = random(0, 0);
   }
 }
-  
-  void keyPressed() {
-  
-  if(key == 'p') {
+
+void keyPressed() {
+
+  if (key == 'p') {
     play = false; // the game will paus itself
     objectYSpeed = random(0, 0);
   } else {
-     play = true; //the game will resume itslef
-     objectYSpeed = random(10, 15);
+    play = true; //the game will resume itslef
+    objectYSpeed = random(10, 15);
   } 
-  
-  if(key == 'r') {
+
+  if (key == 'r') {//the key that will be pressed is r
     reset = false; //
-    miss = 0;
+    miss = 0; //the score will reset
     score = 0;
-   
   }
-  
-  if(key == '=') {
+
+  if (key == '=') { // of the key is the =
     scoreChanger = false;
-    miss = 0;
-    
+    miss = 0; // just eh miss goes to 0
   }
-  
-  } 
+} 
